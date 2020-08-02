@@ -21,8 +21,8 @@ public class TCPConnection {
         // starts server and waits for a connection
         try {
             server = new ServerSocket(port);
+
             System.out.println("Server started");
-            while (true) {
                 System.out.println("Waiting for a client ...");
                 socket = server.accept();
                 System.out.println("Client accepted");
@@ -30,7 +30,21 @@ public class TCPConnection {
                 client.start();
 
 
-            }
+            // close connection
+
+        } catch (IOException i) {
+            System.out.println("کلا نشد که بسازمش");
+            System.out.println(i);
+        }
+    }
+    public void startClient(int port,String ip) {
+        // starts server and waits for a connection
+        try {
+            socket = new Socket(ip, port);
+
+            Thread client = new Thread(new ClientThreads(socket));
+            client.start();
+
 
             // close connection
 
